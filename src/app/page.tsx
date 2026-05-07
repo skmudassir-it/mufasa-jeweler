@@ -13,18 +13,21 @@ const slides = [
     title: "MUFASA JEWELER",
     subtitle: "Premium Jewelry • Watches • Repair • Custom",
     cta: "View Catalogue",
+    href: "#products",
     image: "/hero-bg.png",
   },
   {
     title: "CUSTOM DESIGN",
     subtitle: "Crafted For You, Sparkled With Soul",
     cta: "Contact Us",
+    href: "#contact",
     image: "/pendant-custom.png",
   },
   {
     title: "PROFESSIONAL REPAIR",
     subtitle: "Where Broken Pieces Shine Again",
     cta: "Get Quote",
+    href: "#contact",
     image: "/repair-workshop.png",
   },
 ];
@@ -41,12 +44,12 @@ const products = [
 ];
 
 const categories = [
-  { name: "Rings", subtitle: "Men & Women's", image: "/ring-diamond.png" },
-  { name: "Earrings", subtitle: "Gold & Diamond", image: "/earrings-diamond.png" },
-  { name: "Hip Hop", subtitle: "Chains & Grillz", image: "/chain-gold.png" },
-  { name: "Watches", subtitle: "Luxury Timepieces", image: "/watch-luxury.png" },
-  { name: "Custom", subtitle: "Bespoke Design", image: "/pendant-custom.png" },
-  { name: "Grillz", subtitle: "Custom Gold Teeth", image: "/grillz-gold.png" },
+  { name: "Rings", subtitle: "Men & Women's", image: "/ring-diamond.png", href: "#products" },
+  { name: "Earrings", subtitle: "Gold & Diamond", image: "/earrings-diamond.png", href: "#products" },
+  { name: "Hip Hop", subtitle: "Chains & Grillz", image: "/chain-gold.png", href: "#hiphop" },
+  { name: "Watches", subtitle: "Luxury Timepieces", image: "/watch-luxury.png", href: "#watches" },
+  { name: "Custom", subtitle: "Bespoke Design", image: "/pendant-custom.png", href: "#custom" },
+  { name: "Grillz", subtitle: "Custom Gold Teeth", image: "/grillz-gold.png", href: "#grillz" },
 ];
 
 const galleryImages = [
@@ -126,9 +129,9 @@ function HeroSlider() {
         </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9, duration: 0.8 }}>
-          <Button className="gold-gradient text-black font-semibold px-8 py-6 text-lg rounded-full hover:scale-105 transition-transform shadow-xl shadow-gold-500/20">
+          <a href={s.href} className="inline-flex items-center justify-center gold-gradient text-black font-semibold px-8 py-6 text-lg rounded-full hover:scale-105 transition-transform shadow-xl shadow-gold-500/20">
             {s.cta} <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+          </a>
         </motion.div>
       </div>
 
@@ -183,7 +186,7 @@ function FeaturedProducts() {
         </div>
 
         <div className="text-center mt-12">
-          <Button variant="outline" className="border-gold-500/30 text-gold-400 hover:bg-gold-500/10 rounded-full px-8">View All Products <ArrowRight className="w-4 h-4 ml-2" /></Button>
+          <a href="#products" className="inline-flex items-center justify-center rounded-full border border-gold-500/30 text-gold-400 hover:bg-gold-500/10 px-8 h-10 py-2 text-sm font-medium transition-colors">View All Products <ArrowRight className="w-4 h-4 ml-2" /></a>
         </div>
       </div>
     </section>
@@ -194,7 +197,7 @@ function FeaturedProducts() {
 
 function Categories() {
   return (
-    <section className="py-24 px-4 lg:px-12 bg-secondary/20">
+    <section className="py-24 px-4 lg:px-12 bg-secondary/20" id="collections">
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
           <div className="inline-flex items-center gap-2 text-gold-400 text-sm font-medium tracking-wider mb-4">
@@ -206,7 +209,7 @@ function Categories() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categories.map((cat, i) => (
-            <motion.a key={cat.name} href="#" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+            <motion.a key={cat.name} href={cat.href} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
               className="group relative h-64 rounded-2xl overflow-hidden border border-border hover:border-gold-500/30 transition-all duration-500">
               <Image src={cat.image} alt={cat.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/20" />
@@ -229,7 +232,7 @@ function Categories() {
 
 function Features() {
   return (
-    <section className="py-24 px-4 lg:px-12">
+    <section className="py-24 px-4 lg:px-12" id="features">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((f, i) => (
@@ -279,7 +282,7 @@ function Gallery() {
 
 function About() {
   return (
-    <section className="py-24 px-4 lg:px-12">
+    <section className="py-24 px-4 lg:px-12" id="about">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -312,7 +315,7 @@ function About() {
 
 function ContactCTA() {
   return (
-    <section className="py-24 px-4 lg:px-12">
+    <section className="py-24 px-4 lg:px-12" id="contact">
       <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
         className="max-w-4xl mx-auto text-center p-12 md:p-20 rounded-3xl bg-gradient-to-br from-card via-[#0f0b04] to-card border border-border relative overflow-hidden gold-glow">
         <motion.div animate={{ rotate: 360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -322,8 +325,8 @@ function ContactCTA() {
         <h2 className="font-heading text-3xl md:text-5xl font-bold text-white mb-6 relative z-10">Ready to <span className="gold-text">Shine</span>?</h2>
         <p className="text-muted-foreground text-lg mb-10 relative z-10 max-w-md mx-auto">Visit our store or contact us for custom designs, repairs, and more.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-10">
-          <Button className="gold-gradient text-black font-semibold px-8 py-6 text-lg rounded-full hover:scale-105 transition-transform">Visit Our Store</Button>
-          <Button variant="outline" className="border-gold-500/30 text-gold-400 hover:bg-gold-500/10 rounded-full px-8 py-6 text-lg">Call Now</Button>
+          <a href="#about" className="inline-flex items-center justify-center gold-gradient text-black font-semibold px-8 py-6 text-lg rounded-full hover:scale-105 transition-transform">Visit Our Store</a>
+          <a href="tel:+19015551234" className="inline-flex items-center justify-center rounded-full border border-gold-500/30 text-gold-400 hover:bg-gold-500/10 px-8 py-6 text-lg font-medium transition-colors">Call Now</a>
         </div>
       </motion.div>
     </section>

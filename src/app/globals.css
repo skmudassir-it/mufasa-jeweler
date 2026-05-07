@@ -104,6 +104,9 @@
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, sans-serif;
   }
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
 }
 
 @layer utilities {

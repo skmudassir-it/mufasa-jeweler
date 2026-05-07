@@ -25,9 +25,10 @@ export function Footer() {
           <div>
             <h4 className="font-heading font-semibold text-white mb-4">Quick Links</h4>
             <div className="space-y-2">
-              {["Catalogue", "Custom Jewelry", "Watches", "Repair", "Clearance", "Gallery"].map((l) => (
-                <a key={l} href="#" className="block text-sm text-muted-foreground hover:text-gold-400 transition-colors">{l}</a>
-              ))}
+              {["Catalogue", "Custom Jewelry", "Watches", "Repair", "Clearance", "Gallery"].map((l) => {
+                const hash = l === "Repair" ? "#features" : l === "Gallery" ? "#gallery" : "#products";
+                return (<a key={l} href={hash} className="block text-sm text-muted-foreground hover:text-gold-400 transition-colors">{l}</a>);
+              })}
             </div>
           </div>
 
@@ -36,7 +37,7 @@ export function Footer() {
             <h4 className="font-heading font-semibold text-white mb-4">Categories</h4>
             <div className="space-y-2">
               {["Rings", "Earrings", "Necklaces", "Bracelets", "Pendants", "Grillz"].map((l) => (
-                <a key={l} href="#" className="block text-sm text-muted-foreground hover:text-gold-400 transition-colors">{l}</a>
+                <a key={l} href="#products" className="block text-sm text-muted-foreground hover:text-gold-400 transition-colors">{l}</a>
               ))}
             </div>
           </div>

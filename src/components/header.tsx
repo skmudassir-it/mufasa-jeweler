@@ -9,29 +9,29 @@ import Image from "next/image";
 
 const navLinks = [
   { label: "Catalogue", href: "#products" },
-  { label: "Grillz", href: "#grillz" },
+  { label: "Grillz", href: "#products" },
   {
     label: "Custom Jewelry",
-    href: "#custom",
+    href: "#about",
     children: [
-      { label: "Rings", href: "#rings" },
-      { label: "Necklaces", href: "#necklaces" },
-      { label: "Bracelets", href: "#bracelets" },
-      { label: "Pendants", href: "#pendants" },
+      { label: "Rings", href: "#products" },
+      { label: "Necklaces", href: "#products" },
+      { label: "Bracelets", href: "#products" },
+      { label: "Pendants", href: "#products" },
     ],
   },
-  { label: "Watches", href: "#watches" },
+  { label: "Watches", href: "#products" },
   {
     label: "Jewelry",
-    href: "#jewelry",
+    href: "#products",
     children: [
-      { label: "Men's", href: "#mens" },
-      { label: "Women's", href: "#womens" },
-      { label: "Hip Hop", href: "#hiphop" },
+      { label: "Men's", href: "#products" },
+      { label: "Women's", href: "#products" },
+      { label: "Hip Hop", href: "#products" },
     ],
   },
-  { label: "Repair", href: "#repair" },
-  { label: "Clearance", href: "#clearance" },
+  { label: "Repair", href: "#features" },
+  { label: "Clearance", href: "#products" },
   { label: "Gallery", href: "#gallery" },
 ];
 
@@ -136,8 +136,8 @@ export function Header() {
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <a href="#" className="hover:text-gold-400 transition-colors">Contact Us</a>
-          <a href="#" className="hover:text-gold-400 transition-colors">About</a>
+          <a href="#contact" className="hover:text-gold-400 transition-colors">Contact Us</a>
+          <a href="#about" className="hover:text-gold-400 transition-colors">About</a>
         </div>
       </div>
 
@@ -146,7 +146,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           <MobileNav />
           <a href="/" className="flex items-center gap-2">
-            <Image src="/products/logo.png" alt="Mufasa Jeweler" width={50} height={45} className="object-contain" />
+            <Image src="/logo.png" alt="Mufasa Jeweler" width={50} height={45} className="object-contain" />
             <div className="hidden sm:block">
               <div className="font-heading text-xl lg:text-2xl font-bold gold-text tracking-wide">MUFASA</div>
               <div className="text-[10px] text-gold-500/60 tracking-[0.2em] uppercase -mt-1">Jeweler</div>
