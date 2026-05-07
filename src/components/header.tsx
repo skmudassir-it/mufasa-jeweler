@@ -2,77 +2,41 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, Search, ShoppingCart, User, Phone, MapPin, ChevronDown } from "lucide-react";
+import { Menu, Search, ShoppingCart, User, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { navLinks } from "@/lib/data";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-const navLinks = [
-  { label: "Catalogue", href: "#products" },
-  { label: "Grillz", href: "#products" },
-  {
-    label: "Custom Jewelry",
-    href: "#about",
-    children: [
-      { label: "Rings", href: "#products" },
-      { label: "Necklaces", href: "#products" },
-      { label: "Bracelets", href: "#products" },
-      { label: "Pendants", href: "#products" },
-    ],
-  },
-  { label: "Watches", href: "#products" },
-  {
-    label: "Jewelry",
-    href: "#products",
-    children: [
-      { label: "Men's", href: "#products" },
-      { label: "Women's", href: "#products" },
-      { label: "Hip Hop", href: "#products" },
-    ],
-  },
-  { label: "Repair", href: "#features" },
-  { label: "Clearance", href: "#products" },
-  { label: "Gallery", href: "#gallery" },
-];
-
 function DesktopNav() {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
   return (
     <nav className="hidden lg:flex items-center gap-1">
-      {navLinks.map((link) => (
-        <div
-          key={link.label}
-          className="relative"
-          onMouseEnter={() => setOpenDropdown(link.label)}
-          onMouseLeave={() => setOpenDropdown(null)}
-        >
-          <a
+      {navLinks.map((link) => {
+        const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+        return (
+          <Link
+            key={link.label}
             href={link.href}
-            className="px-3 py-2 text-sm font-medium text-white/70 hover:text-gold-400 transition-colors duration-300 flex items-center gap-1"
+            className={`px-3 py-2 text-sm font-medium transition-colors duration-300 ${
+              isActive ? "text-gold-400" : "text-white/70 hover:text-gold-400"
+            }`}
           >
             {link.label}
-            {link.children && <ChevronDown className="w-3 h-3" />}
-          </a>
-          {link.children && openDropdown === link.label && (
-            <div className="absolute top-full left-0 mt-1 w-48 bg-card border border-border rounded-lg shadow-xl py-2 z-50">
-              {link.children.map((child) => (
-                <a
-                  key={child.label}
-                  href={child.href}
-                  className="block px-4 py-2 text-sm text-white/70 hover:text-gold-400 hover:bg-secondary/50 transition-colors"
-                >
-                  {child.label}
-                </a>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
+            {isActive && (
+              <motion.div layoutId="nav-underline" className="h-0.5 bg-gold-500 mt-0.5 rounded-full" />
+            )}
+          </Link>
+        );
+      })}
     </nav>
   );
 }
 
 function MobileNav() {
+  const pathname = usePathname();
   return (
     <Sheet>
       <SheetTrigger>
@@ -82,29 +46,20 @@ function MobileNav() {
       </SheetTrigger>
       <SheetContent side="left" className="bg-card border-border w-80 pt-16">
         <nav className="flex flex-col gap-1">
-          {navLinks.map((link) => (
-            <div key={link.label}>
-              <a
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.label}
                 href={link.href}
-                className="flex items-center gap-2 px-3 py-3 text-sm font-medium text-white/80 hover:text-gold-400 hover:bg-secondary/30 rounded-lg transition-colors"
+                className={`flex items-center gap-2 px-3 py-3 text-sm font-medium rounded-lg transition-colors ${
+                  isActive ? "text-gold-400 bg-gold-500/10" : "text-white/80 hover:text-gold-400 hover:bg-secondary/30"
+                }`}
               >
                 {link.label}
-              </a>
-              {link.children && (
-                <div className="ml-4 border-l border-border pl-4 mt-1 space-y-1">
-                  {link.children.map((child) => (
-                    <a
-                      key={child.label}
-                      href={child.href}
-                      className="block px-3 py-2 text-sm text-white/50 hover:text-gold-400 transition-colors"
-                    >
-                      {child.label}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+              </Link>
+            );
+          })}
         </nav>
       </SheetContent>
     </Sheet>
@@ -136,8 +91,8 @@ export function Header() {
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <a href="#contact" className="hover:text-gold-400 transition-colors">Contact Us</a>
-          <a href="#about" className="hover:text-gold-400 transition-colors">About</a>
+          <Link href="/contact" className="hover:text-gold-400 transition-colors">Contact Us</Link>
+          <Link href="/about" className="hover:text-gold-400 transition-colors">About</Link>
         </div>
       </div>
 
@@ -145,13 +100,13 @@ export function Header() {
       <div className="flex items-center justify-between px-4 lg:px-12 py-3">
         <div className="flex items-center gap-4">
           <MobileNav />
-          <a href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Mufasa Jeweler" width={50} height={45} className="object-contain" />
             <div className="hidden sm:block">
               <div className="font-heading text-xl lg:text-2xl font-bold gold-text tracking-wide">MUFASA</div>
               <div className="text-[10px] text-gold-500/60 tracking-[0.2em] uppercase -mt-1">Jeweler</div>
             </div>
-          </a>
+          </Link>
         </div>
 
         <DesktopNav />
