@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Search, ShoppingCart, User, Phone, MapPin, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { Menu, Search, ShoppingCart, User, Phone, MapPin, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Image from "next/image";
 
 const navLinks = [
   { label: "Catalogue", href: "#products" },
@@ -145,13 +146,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           <MobileNav />
           <a href="/" className="flex items-center gap-2">
-            <motion.div
-              initial={{ rotate: -10 }}
-              animate={{ rotate: 0 }}
-              className="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-lg"
-            >
-              M
-            </motion.div>
+            <Image src="/products/logo.png" alt="Mufasa Jeweler" width={50} height={45} className="object-contain" />
             <div className="hidden sm:block">
               <div className="font-heading text-xl lg:text-2xl font-bold gold-text tracking-wide">MUFASA</div>
               <div className="text-[10px] text-gold-500/60 tracking-[0.2em] uppercase -mt-1">Jeweler</div>
